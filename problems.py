@@ -34,7 +34,6 @@ def get_prob02():
 def find_facts(mfact):
   import itertools
   import operator
-  import math
 
   pmax = int(math.sqrt(mfact))
   primes = list(itertools.takewhile(lambda x: x<pmax+1, itertools.count(3, 2)))
@@ -45,3 +44,23 @@ def find_facts(mfact):
 def get_prob03(num):
   return find_facts(num)
 
+def is_palindrome(snum):
+    if len(snum) <= 1:
+        return True
+    else:
+        return snum[0] == snum[-1] and is_palindrome(snum[1:-1])
+
+def get_fact_pals(fmin, fmax, nmax):
+    nums = []
+    for i in range(fmin, fmax):
+        for j in range(fmin, fmax):
+            num = i*j
+            if num <= nmax and is_palindrome(str(num)):
+                nums.append(num)
+    return nums
+
+def get_prob04():
+    pals = get_fact_pals(900, 1000, 1000000)
+    return max(pals)
+
+  
